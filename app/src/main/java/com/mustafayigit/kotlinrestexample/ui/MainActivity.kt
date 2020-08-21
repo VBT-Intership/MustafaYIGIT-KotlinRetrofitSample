@@ -10,7 +10,7 @@ import com.mustafayigit.kotlinrestexample.data.ApiClient
 import com.mustafayigit.kotlinrestexample.data.service.VersionService
 import com.mustafayigit.kotlinrestexample.repository.VersionRepository
 import com.mustafayigit.kotlinrestexample.util.Status
-import com.mustafayigit.kotlinrestexample.util.extToast
+import com.mustafayigit.kotlinrestexample.util.extStartActivity
 import com.mustafayigit.kotlinrestexample.viewmodel.HomeViewModel
 import com.mustafayigit.kotlinrestexample.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.activity_main.*
@@ -27,7 +27,8 @@ class MainActivity : AppCompatActivity() {
         val viewModel = ViewModelFactory(repository).create(HomeViewModel::class.java)
 
         recyclerHome.adapter = HomeRecyclerAdapter {
-            this extToast it.id
+            val bundle = Bundle().apply { putParcelable("version", it) }
+            extStartActivity(EditActivity::class.java, bundle)
         }
         observeData(viewModel, recyclerHome.adapter as HomeRecyclerAdapter)
 
