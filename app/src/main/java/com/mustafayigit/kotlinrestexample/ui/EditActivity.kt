@@ -15,8 +15,9 @@ class EditActivity : AppCompatActivity() {
         val targetVersion = intent.getBundleExtra("bundle")?.getParcelable<Version>("version")
 
         targetVersion?.let {
-            txtVersionName.editText?.setText(it.name)
-            txtVersionNumber.editText?.setText("${it.number}")
+            txtVersionName.text = it.name
+            txtVersionNumber.text = "${it.number}"
+
             Glide.with(this)
                 .load(it.image)
                 .into(imgVersionPhoto)
